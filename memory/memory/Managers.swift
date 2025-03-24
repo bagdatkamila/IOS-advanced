@@ -7,6 +7,13 @@
 
 import UIKit
 
+protocol ProfileUpdateDelegate: AnyObject {
+    // TODO: Consider protocol inheritance requirements
+    // Think: When should we restrict protocol to reference types only?
+    func profileDidUpdate(_ profile: UserProfile)
+    func profileLoadingError(_ error: Error)
+}
+
 class ProfileManager {
     // TODO: Think about appropriate storage type for active profiles
     private var activeProfiles: [String: UserProfile] = [:]
@@ -50,6 +57,14 @@ class ProfileManager {
         onProfileUpdate?(profile)
         delegate?.profileDidUpdate(profile)
     }
+}
+
+protocol ImageLoaderDelegate: AnyObject {
+    // TODO: Think about protocol requirements
+    // Consider: What types can conform to this protocol?
+    // Consider: How does this affect memory management?
+    func imageLoader(_ loader: ImageLoader, didLoad image: UIImage)
+    func imageLoader(_ loader: ImageLoader, didFailWith error: Error)
 }
 
 class ImageLoader {

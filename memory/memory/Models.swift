@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserProfile {
+struct UserProfile: Hashable {
     let id: UUID
     let username: String
     var bio: String
@@ -29,7 +29,7 @@ struct UserProfile {
     
 }
 
-struct Post {
+struct Post: Hashable {
     let id: UUID
     let authorId: UUID
     var content: String
