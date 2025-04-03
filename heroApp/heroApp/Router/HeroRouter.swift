@@ -1,17 +1,19 @@
-//
-//  HeroRouter.swift
-//  heroApp
-//
-//  Created by Камила Багдат on 24.03.2025.
-//
-
 import UIKit
 import SwiftUI
 
 final class HeroRouter {
     var rootViewController: UINavigationController?
     
-    func showDetail() {
+    func showDetails(for id: Int) {
+        let detailVC = makeDetailViewController(id: id)
+        rootViewController?.pushViewController(detailVC, animated: true)
+    }
+
+    private func makeDetailViewController(id: Int) -> UIViewController {
+        let service = HeroServiceImpl()
         
+        let detailView = HeroDetailView(heroId: id, service: service)
+        
+        return UIHostingController(rootView: detailView)
     }
 }

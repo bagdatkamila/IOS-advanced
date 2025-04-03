@@ -1,8 +1,8 @@
 //
 //  SceneDelegate.swift
-//  heroApp
+//  pinterest2
 //
-//  Created by Камила Багдат on 24.03.2025.
+//  Created by Камила Багдат on 03.04.2025.
 //
 
 import UIKit
@@ -14,29 +14,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
+
+        let viewModel = ImageViewModel()
         
-        let router = HeroRouter()
-        let heroService = HeroServiceImpl()
-        let viewModel = HeroViewModel(service: heroService, router: router)
-        
-        let listViewController = UIHostingController(
-            rootView: HeroView(
-                viewModel: viewModel
-            )
+        let controller = UIHostingController(
+            rootView: ContentView(viewModel: viewModel)
+            
         )
-        
-        let rootViewController = UINavigationController(
-            rootViewController: listViewController
-        )
-        
-        router.rootViewController = rootViewController
-        
-        window?.rootViewController = rootViewController
+        window?.rootViewController = controller
         window?.makeKeyAndVisible()
-        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
